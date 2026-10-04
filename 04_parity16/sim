@@ -1,0 +1,66 @@
+#! /data/data/com.termux/files/usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/data/data/com.termux/files/usr/lib/ivl/system.vpi";
+:vpi_module "/data/data/com.termux/files/usr/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/data/data/com.termux/files/usr/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/data/data/com.termux/files/usr/lib/ivl/v2005_math.vpi";
+:vpi_module "/data/data/com.termux/files/usr/lib/ivl/va_math.vpi";
+S_0xb400007fa4a71000 .scope module, "tb_parity16" "tb_parity16" 2 4;
+ .timescale -9 -12;
+v0xb400007fa4a38a00_0 .var "data", 15 0;
+v0xb400007fa4a38aa0_0 .net "p_even", 0 0, L_0xb400007fa4a312a0;  1 drivers
+S_0xb400007fa4a71180 .scope module, "uut" "parity16" 2 8, 3 3 0, S_0xb400007fa4a71000;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 16 "data";
+    .port_info 1 /OUTPUT 1 "p_even";
+L_0xb400007fa4a312a0 .functor XOR 1, L_0xb400007fa4a38b40, L_0xb400007fa4a38c80, C4<0>, C4<0>;
+v0xb400007fa4a38780_0 .net "data", 15 0, v0xb400007fa4a38a00_0;  1 drivers
+v0xb400007fa4a38820_0 .net "p_even", 0 0, L_0xb400007fa4a312a0;  alias, 1 drivers
+v0xb400007fa4a388c0_0 .net "p_high", 0 0, L_0xb400007fa4a38c80;  1 drivers
+v0xb400007fa4a38960_0 .net "p_low", 0 0, L_0xb400007fa4a38b40;  1 drivers
+L_0xb400007fa4a38be0 .part v0xb400007fa4a38a00_0, 0, 8;
+L_0xb400007fa4a38d20 .part v0xb400007fa4a38a00_0, 8, 8;
+S_0xb400007fa4a71300 .scope module, "u0" "odd_parity8" 3 9, 4 3 0, S_0xb400007fa4a71180;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "data";
+    .port_info 1 /OUTPUT 1 "p";
+v0xb400007fa4a38500_0 .net "data", 7 0, L_0xb400007fa4a38be0;  1 drivers
+v0xb400007fa4a385a0_0 .net "p", 0 0, L_0xb400007fa4a38b40;  alias, 1 drivers
+L_0xb400007fa4a38b40 .reduce/xnor L_0xb400007fa4a38be0;
+S_0xb400007fa4a71480 .scope module, "u1" "odd_parity8" 3 10, 4 3 0, S_0xb400007fa4a71180;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "data";
+    .port_info 1 /OUTPUT 1 "p";
+v0xb400007fa4a38640_0 .net "data", 7 0, L_0xb400007fa4a38d20;  1 drivers
+v0xb400007fa4a386e0_0 .net "p", 0 0, L_0xb400007fa4a38c80;  alias, 1 drivers
+L_0xb400007fa4a38c80 .reduce/xnor L_0xb400007fa4a38d20;
+    .scope S_0xb400007fa4a71000;
+T_0 ;
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v0xb400007fa4a38a00_0, 0, 16;
+    %delay 10000, 0;
+    %vpi_call 2 11 "$display", "data=%h  p=%b", v0xb400007fa4a38a00_0, v0xb400007fa4a38aa0_0 {0 0 0};
+    %pushi/vec4 1, 0, 16;
+    %store/vec4 v0xb400007fa4a38a00_0, 0, 16;
+    %delay 10000, 0;
+    %vpi_call 2 12 "$display", "data=%h  p=%b", v0xb400007fa4a38a00_0, v0xb400007fa4a38aa0_0 {0 0 0};
+    %pushi/vec4 65535, 0, 16;
+    %store/vec4 v0xb400007fa4a38a00_0, 0, 16;
+    %delay 10000, 0;
+    %vpi_call 2 13 "$display", "data=%h  p=%b", v0xb400007fa4a38a00_0, v0xb400007fa4a38aa0_0 {0 0 0};
+    %pushi/vec4 42405, 0, 16;
+    %store/vec4 v0xb400007fa4a38a00_0, 0, 16;
+    %delay 10000, 0;
+    %vpi_call 2 14 "$display", "data=%h  p=%b", v0xb400007fa4a38a00_0, v0xb400007fa4a38aa0_0 {0 0 0};
+    %vpi_call 2 15 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "tb_parity16.v";
+    "parity16.v";
+    "odd_parity8.v";
